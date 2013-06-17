@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @button.name %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @button.num %>
+</p>
+
+<p>
+  <b>Sides:</b>
+  <%= @button.sides %>
+</p>
+
+<p>
+  <b>Modifier:</b>
+  <%= @button.mod %>
+</p>
+
+
+<%= link_to 'Edit', edit_button_path(@button) %> |
+<%= link_to 'Back', buttons_path %>

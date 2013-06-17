@@ -1,0 +1,61 @@
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <h1><small>Dice:</small></h1>
+    <hr>
+    Basic:<br>
+    <div class="btn-group">
+      <%= link_to "1d2", "/roll/go?d=2&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d4", "/roll/go?d=4&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d6", "/roll/go?d=6&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d8", "/roll/go?d=8&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d10", "/roll/go?d=10&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d12", "/roll/go?d=12&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d20", "/roll/go?d=20&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+      <%= link_to "1d100", "/roll/go?d=100&n=1", :remote => true, :type => "button", :class => "btn btn-large" %>
+    </div>
+
+    <hr>
+    Special:<br>
+    <div class="row-fluid">
+      <% index = 0 %>
+        <% @buttons.each do |b| %>
+          <%= link_to "#{b.name} (#{b.num}d#{b.sides}+#{b.mod})", "/roll/go?d=#{b.sides}&n=#{b.num}&m=#{b.mod}", :remote => true, :type => "button", :class => "span6 btn btn-info btn-large" %>
+
+          <% index += 1 %>
+          <% if index % 2 == 0 %>
+          </div>
+          <br>
+          <div class="row-fluid">
+          <% end %>
+
+        <% end %>  
+    </div>
+
+    <br>
+    <%= link_to "Manage Buttons", buttons_path %>
+
+    <hr>
+    Custom:<br>
+    
+    <%= form_tag("/roll/go", :method => "get", :remote => true) do %>
+
+      
+      <div class="input-append">
+        <input class="input-small" id="n" name="n" type="number" placeholder="Num" size="4"/>
+      <input class="input-small" id="d" name="d" type="number" placeholder="Sides" />
+        <input class="input-small" id="m" name="m" type="number" placeholder="Mod" />
+        <%= submit_tag("Roll", :class => "btn") %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="span4">
+    <h1> <small>Results:</small> </h1>
+    <hr>
+    <h3><div id="dice_area">None so far!</div></h3>
+  </div>
+
+</div>
