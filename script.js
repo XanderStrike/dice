@@ -25,6 +25,17 @@ function getDisplayValue(number) {
     return String.fromCharCode('a'.charCodeAt(0) + (number - 1));
 }
 
+function getRandomAnimation() {
+    const animations = [
+        'roll-rotate',
+        'roll-flip',
+        'roll-bounce',
+        'roll-shake',
+        'roll-spin-bounce'
+    ];
+    return animations[Math.floor(Math.random() * animations.length)];
+}
+
 function rollDice() {
     const diceCount = parseInt(document.getElementById('diceCount').value);
     const diceType = parseInt(document.getElementById('diceType').value);
@@ -52,8 +63,9 @@ function rollDice() {
         const result = Math.floor(Math.random() * diceType) + 1;
         results.push(result);
         
-        // Add rolling animation
-        dieElement.style.animation = 'roll 0.5s ease-out';
+        // Add random rolling animation
+        const animation = getRandomAnimation();
+        dieElement.style.animation = `${animation} 0.5s ease-out`;
         dieElement.textContent = getDisplayValue(result);
         
         // Check for natural 20
