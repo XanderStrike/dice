@@ -20,6 +20,11 @@ function createFirework(element) {
     }
 }
 
+function getDisplayValue(number) {
+    // Convert all numbers to letters (1=a, 2=b, etc)
+    return String.fromCharCode('a'.charCodeAt(0) + (number - 1));
+}
+
 function rollDice() {
     const diceCount = parseInt(document.getElementById('diceCount').value);
     const diceType = parseInt(document.getElementById('diceType').value);
@@ -49,7 +54,7 @@ function rollDice() {
         
         // Add rolling animation
         dieElement.style.animation = 'roll 0.5s ease-out';
-        dieElement.textContent = result;
+        dieElement.textContent = getDisplayValue(result);
         
         // Check for natural 20
         if (diceType === 20 && result === 20) {
@@ -89,7 +94,7 @@ function updateRollLog() {
                 <div class="log-dice-container">
                     ${roll.results.map(result => `
                         <div class="log-dice ${result === 20 && roll.type.includes('D20') ? 'natural-20' : ''}" 
-                             data-type="d${roll.type.split('D')[1]}">${result}</div>
+                             data-type="d${roll.type.split('D')[1]}">${getDisplayValue(result)}</div>
                     `).join('')}
                 </div>
                 <span class="log-total">=&nbsp;${roll.total}</span>
