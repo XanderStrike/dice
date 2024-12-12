@@ -17,17 +17,30 @@ body {
 }
 
 .dice {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     background-color: white;
     border: 2px solid #333;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 24px;
     margin: 0 auto;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.dice::after {
+    content: attr(data-type);
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 10px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1px 3px;
+    border-radius: 3px;
 }
 
 .controls {
@@ -53,4 +66,160 @@ select {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
+}
+
+.roll-log {
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.log-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+}
+
+.log-entry {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.dice-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 60px;
+}
+
+.dice-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.total-result {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.log-dice-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.log-dice {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.log-dice::after {
+    content: attr(data-type);
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    font-size: 8px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0px 2px;
+    border-radius: 2px;
+}
+
+.log-entry-time {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.log-total {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes spark {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.firework {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.firework::before {
+    content: '✦';
+    position: absolute;
+    animation: spark 0.5s ease-out forwards;
+    color: gold;
+    font-size: 20px;
+    transform-origin: center;
+    left: -10px;
+    top: -10px;
+}
+
+.dice.natural-20 {
+    animation: explode 0.5s ease-out;
+    color: gold;
+    border-color: gold;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.log-dice.natural-20 {
+    color: gold;
+    border-color: gold;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 } 

@@ -13,15 +13,22 @@
             <div id="dice" class="dice">1</div>
         </div>
         <div class="controls">
-            <select id="diceType">
-                <option value="6">D6</option>
-                <option value="4">D4</option>
-                <option value="8">D8</option>
-                <option value="10">D10</option>
-                <option value="12">D12</option>
-                <option value="20">D20</option>
-            </select>
+            <div class="dice-inputs">
+                <input type="number" id="diceCount" value="1" min="1" max="10">
+                <select id="diceType">
+                    <option value="6">D6</option>
+                    <option value="4">D4</option>
+                    <option value="8">D8</option>
+                    <option value="10">D10</option>
+                    <option value="12">D12</option>
+                    <option value="20">D20</option>
+                </select>
+            </div>
             <button onclick="rollDice()">Roll Dice</button>
+        </div>
+        <div class="roll-log">
+            <h2>Roll History</h2>
+            <div id="logContainer" class="log-container"></div>
         </div>
     </div>
     <script src="script.js"></script>
