@@ -1,25 +1,6 @@
 // Keep track of rolls
 let rollHistory = [];
 
-function createFirework(element) {
-    const rect = element.getBoundingClientRect();
-    const numSparks = 8;
-    
-    for (let i = 0; i < numSparks; i++) {
-        const spark = document.createElement('div');
-        spark.className = 'firework';
-        // Use fixed positioning relative to viewport
-        spark.style.position = 'fixed';
-        spark.style.left = `${rect.left + rect.width/2}px`;
-        spark.style.top = `${rect.top + rect.height/2}px`;
-        spark.style.transform = `rotate(${i * (360/numSparks)}deg) translateX(20px)`;
-        document.body.appendChild(spark);
-        
-        // Remove spark after animation
-        setTimeout(() => spark.remove(), 500);
-    }
-}
-
 function getDisplayValue(number) {
     // Convert all numbers to letters (1=a, 2=b, etc)
     return String.fromCharCode('a'.charCodeAt(0) + (number - 1));
@@ -42,8 +23,8 @@ function rollDice() {
     const diceContainer = document.querySelector('.dice-container');
     
     // Validate input
-    if (diceCount < 1 || diceCount > 10) {
-        alert('Please enter a number between 1 and 10');
+    if (diceCount < 1 || diceCount > 20) {
+        alert('Please enter a number between 1 and 20');
         return;
     }
 
@@ -71,7 +52,6 @@ function rollDice() {
         // Check for natural 20
         if (diceType === 20 && result === 20) {
             dieElement.classList.add('natural-20');
-            createFirework(dieElement);
         }
     }
     
@@ -99,6 +79,14 @@ function rollDice() {
 
 function updateRollLog() {
     const logContainer = document.getElementById('logContainer');
+    const rollLog = document.querySelector('.roll-log');
+    
+    if (rollHistory.length === 0) {
+        rollLog.classList.remove('has-rolls');
+        return;
+    }
+    
+    rollLog.classList.add('has-rolls');
     logContainer.innerHTML = rollHistory.map(roll => `
         <div class="log-entry">
             <div style="display: flex; align-items: center;">
